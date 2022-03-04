@@ -1,9 +1,6 @@
 package division.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -13,41 +10,34 @@ public class District {
     @Id
     private int id;
     private String name;
-    @OneToMany
-    private List<Division> division_id;
+    private String bn_name;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "division_id")
+    private Division division;
 
 
     public int getId() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getBn_name() {
+        return bn_name;
     }
 
-    public List<Division> getDivision_id() {
-        return division_id;
+    public Division getDivision() {
+        return division;
     }
-
-    public void setDivision_id(List<Division> division_id) {
-        this.division_id = division_id;
-    }
-
 
     @Override
     public String toString() {
         return "District{" +
                 "id=" + id +
+                ", bn_name='" + bn_name + '\'' +
                 ", name='" + name + '\'' +
-                ", division_id=" + division_id +
+                ", division=" + division +
                 '}';
     }
 }
